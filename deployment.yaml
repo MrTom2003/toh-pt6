@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ts-website
+  name: website
 spec:
-  selector: # Define the wrapping strategy
-    matchLabels: # Match all pods with the defined labels
-      app: contoso-website # Labels follow the `name: value` template
-  template: # This is the template of the pod inside the deployment
+  replicas: 3
+  selector:
+    matchLabels:
+      app: website
+  template:
     metadata:
       labels:
-        app: ts-website
+        app: website
     spec:
       containers:
-        - image: toh4
-          name: ts-website
+        - name: website
+          image: toh4
           resources:
             requests:
               cpu: 100m
@@ -22,5 +23,14 @@ spec:
               cpu: 250m
               memory: 256Mi
           ports:
-            - containerPort: 80
-              name: http
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: website
+spec:
+  ports:
+    - port: 3000
+  selector:
+    app: website
