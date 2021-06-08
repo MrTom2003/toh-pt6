@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "ts-680f"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "ts-680f"
+  template:
+    metadata:
+      labels:
+        app: "ts-680f"
+    spec:
+      containers:
+        - name: "ts-680f"
+          image: "tsdocker.azurecr.io/ts"
+          ports:
+          - containerPort: 80
