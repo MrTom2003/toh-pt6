@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "mycluster-01fc"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "mycluster-01fc"
+  template:
+    metadata:
+      labels:
+        app: "mycluster-01fc"
+    spec:
+      containers:
+        - name: "mycluster-01fc"
+          image: "mytscontainerregistry.azurecr.io/mycluster"
+          ports:
+          - containerPort: 80
